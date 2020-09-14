@@ -13,6 +13,7 @@ module.exports = function admonitionPlugin(md, options) {
     render = renderDefault,
     type = "",
     title = null,
+    titleTransform = options.titleTransform || ((value) => value),
     types = options.types || ["note", "abstract", "info", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote"],
     classes = options.classes || ["admonition"];
 
@@ -42,7 +43,7 @@ module.exports = function admonitionPlugin(md, options) {
     }
 
     if (title === "" || !title) {
-      title = type;
+      title = titleTransform(type);
     }
 
     return types.includes(type);
